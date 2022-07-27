@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Routes, Route, Link } from "react-router-dom";
+import Welcome from "./components/Welcome";
+import About from "./components/About";
+import Content from "./components/Content";
+import Todos from "./components/Todos";
+
+const routes = [
+  { name: "welcome", component: Welcome, url: "/" },
+  { name: "about", component: About, url: "/about" },
+  { name: "content", component: Content, url: "/content" },
+  { name: "todos", component: Todos, url: "/todos" },
+];
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>React web app</h2>
+      <ol>
+        {routes.map((el, idx) => (
+          <li key={idx + "-" + el.name}>
+            <Link to={el.url}>{el.name}</Link>
+          </li>
+        ))}
+      </ol>
+      <hr />
+      <Routes>
+        {routes.map((el, idx) => (
+          <Route
+            key={idx + "_" + el.name}
+            path={el.url}
+            element={<el.component />}
+          />
+        ))}
+      </Routes>
     </div>
   );
 }

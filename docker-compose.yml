@@ -1,0 +1,13 @@
+version: '3.2'
+services:
+  web-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - git_url=https://github.com/xqcao/cicdreactdemo.git
+        - app-name=cicdreactdemo
+    volumes:
+      - ./:/frontend
+    ports:
+      - '3000:80'
